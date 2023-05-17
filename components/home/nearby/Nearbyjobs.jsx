@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import styles from './nearbyjobs.style';
 
+import { useRouter } from 'expo-router';
+
 import { COLORS } from '../../../constants';
 
 import NearByJobCard from '../../common/cards/nearby/NearbyJobCard';
@@ -9,6 +11,7 @@ import NearByJobCard from '../../common/cards/nearby/NearbyJobCard';
 import useFetch from '../../../hook/useFetch';
 
 const Nearbyjobs = () => {
+  const router = useRouter()
   const { data, isLoading, error } = useFetch('search', {
     query: 'React developer',
     num_pages: 1,
@@ -34,7 +37,7 @@ const Nearbyjobs = () => {
               job={job}
               key={`nearby-job-${job?.job_id}`}
               handleNavigate={() =>
-                useRouter.push(`/job-details/${job.job_id}`)
+                router.push(`/job-details/${job.job_id}`)
               }
             />
           ))
